@@ -492,5 +492,15 @@ dir_create("recipes")
 
 written <- map_chr(recipes_data, function(r) as.character(write_recipe_qmd(r)))
 
+# Remove leftover .qmd files that no longer correspond to a recipe (e.g. after
+# a title or category change), so stale copies don't stay on the site.
+existing <- as.character(dir_ls("recipes", recurse = TRUE, glob = "*.qmd"))
+stale <- setdiff(existing, written)
+if (length(stale) > 0) {
+  file_delete(stale)
+  cat(glue("Removed {length(stale)} stale recipe files:\n"))
+  cat(paste(" -", stale), sep = "\n")
+}
+
 cat(glue("Wrote {length(written)} recipe files:\n"))
 cat(paste(" -", written), sep = "\n")

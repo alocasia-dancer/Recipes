@@ -1,6 +1,0 @@
----
-title: "Sayaka's egg recipe"
-categories: ["Πρωινό & σνακ"]
----
-
-Water, soy sauce, and honey. Add some chives at the end.
